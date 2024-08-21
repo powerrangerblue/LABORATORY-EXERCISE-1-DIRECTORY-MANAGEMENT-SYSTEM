@@ -51,8 +51,8 @@ void handleMainMenuSelection (int choice) {
         case 4:
             exit();
             break;
-             cout << "Invalid choice. Please try again.\n";
-        
+            default:
+             cout << "Invalid choice. Please try again.\n";    
     }
 }
 
@@ -64,6 +64,21 @@ void listFilesMenu() {
     cout << "3. List files based on a pattern\n";
     cout << "Enter your choice: ";
     cin >> choice;
+    
+switch (choice) {
+        case 1:
+           cout << "listAllFiles()\n";
+            break;
+        case 2:
+              cout << "listFilesByExtension()\n";
+            break;
+        case 3:
+             cout <<  listFilesByPattern()\n";
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+    }
+}
 
 
 

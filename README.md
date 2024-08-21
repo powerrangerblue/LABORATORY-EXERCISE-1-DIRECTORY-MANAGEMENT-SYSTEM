@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <vector>
 #include <regex>
+#include <string>
 
 namespace fs = std: : filesystem;
 using namespace std;
@@ -67,18 +68,26 @@ void listFilesMenu() {
     
 switch (choice) {
         case 1:
-           cout << "listAllFiles()\n";
+           listAllFiles();
             break;
         case 2:
-              cout << "listFilesByExtension()\n";
+           listFilesByExtension();
             break;
         case 3:
-             cout <<  listFilesByPattern()\n";
+           listFilesByPattern();
             break;
         default:
             cout << "Invalid choice. Returning to main menu.\n";
     }
 }
+
+void listAllFiles () {
+cout << \n"Files in the current directory:\n";
+for (cons audio & entry: fs: : directory_iterator(fs:: current_path())) {
+cout << entry.path (). filename(). string() << endl;
+   }
+}
+
 
 
 

@@ -13,7 +13,7 @@ void listFilesByExtension();
 void listFilesByPattern();
 void createDirectory();
 void changeDirectory();
-viod diaplayDirectoryMenu();
-viod handleDirectorySelecyion (int choice);
-viod exitProgram();
+void diaplayDirectoryMenu();
+void handleDirectorySelection (int choice);
+void exitProgram();
 

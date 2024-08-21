@@ -40,21 +40,30 @@ void diaplayMainMenu() {
 void handleMainMenuSelection (int choice) {
     switch (choice) {
         case 1:
-            cout << "listFilesMenu()\n";
+          listFilesMenu();
             break;
         case 2:
-            createDirectory()\n;
+           createDirectory();
             break;
         case 3:
-            changeDirectory();
+           changeDirectory();
             break;
         case 4:
-            exitProgram();
+            exit();
             break;
-        default:
-            cerr << "Invalid choice. Please try again.\n";
+             cout << "Invalid choice. Please try again.\n";
+        
     }
 }
+
+void listFilesMenu() {
+    int choice;
+    cout << "\nList Files Menu\n";
+    cout << "1. List all files in the current directory\n";
+    cout << "2. List files based on a specific extension\n";
+    cout << "3. List files based on a pattern\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
 
 
 

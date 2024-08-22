@@ -104,12 +104,17 @@ void listFilesByPattern() {
     string pattern;
     cout << "Enter the pattern (e.g., moha*.*): ";
     cin >> pattern;
+     
+string regex_pattern = regex_replace(pattern,regex("\\*"),".*");
     
-string regex_pattern = regex_replace(pattern,
-
 cout << "\nFiles matching pattern '" << pattern << "':\n";
     for (const auto& entry : fs::directory_iterator(fs::current_path())) {
-    
+    if (regex_match(entry.path().filename().string(), 
+    regex(regex_pattern))) {
+        cout << entry.path().filename().string() << endl;
+        }
+    }
+}
 
 
 

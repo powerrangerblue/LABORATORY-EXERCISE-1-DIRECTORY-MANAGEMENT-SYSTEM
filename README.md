@@ -88,6 +88,17 @@ cout << entry.path (). filename(). string() << endl;
    }
 }
 
+void listFilesByExtension() {
+    string extension;
+    cout << "Enter the file extension (e.g., .txt): ";
+    cin >> extension;
+    cout << "\nFiles with extension '" << extension << "':\n";
+    for (const auto& entry : fs::directory_iterator(fs::current_path())) {
+        if (entry.path().extension() == extension) {
+cout << entry.path().filename().string() << endl;
+        }
+    }
+}
 
 
 

@@ -116,6 +116,19 @@ cout << "\nFiles matching pattern '" << pattern << "':\n";
     }
 }
 
+void createDirectory() {
+    string dirName;
+    cout << "Enter the name of the directory to create: ";
+    cin >> dirName;
+
+fs::path newDir = fs::current_path() / dirName; // Create in the current directory
+    if (fs::create_directory(newDir)) {
+        cout << "Directory '" << dirName << "' created successfully.\n";
+    } else {
+        cout << "Error: Directory '" << dirName << "' could not be created.\n";
+    }
+}
+
 
 
 

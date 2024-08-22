@@ -129,6 +129,12 @@ fs::path newDir = fs::current_path() / dirName; // Create in the current directo
     }
 }
 
+void changeDirectory() {
+    int choice;
+    displayDirectoryMenu();
+    cin >> choice;
+handleDirectorySelection(choice);
+}
 
 
 

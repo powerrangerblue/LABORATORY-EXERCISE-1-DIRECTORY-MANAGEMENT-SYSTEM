@@ -161,7 +161,18 @@ fs : :current_path(fs::path("/"));
                 fs::current_path(dirName);
         cout << "Moved to directory: " << fs::current_path() << "\n";
 } else {
-cout << "Error:
+cout << "Error: Directory " << dirName << " does not exist.\n."
+}
+break;
+}
+default: 
+cout << "Invalid choice. Returning to main menu.\n";
+}
+}
+
+void exitProgram() {
+cout << " Exiting the program. Goodbye!\n.";
+}
 
 
 

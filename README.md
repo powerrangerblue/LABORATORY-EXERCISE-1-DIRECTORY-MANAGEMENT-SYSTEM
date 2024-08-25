@@ -3,57 +3,58 @@
 #include <vector>
 #include <regex>
 #include <string>
+#include <cstdlib> 
 
-namespace fs = std: : filesystem;
+namespace fs = std::filesystem;
 using namespace std;
 
 void displayMainMenu();
-void handleMainMenuSelection (int choice);
+void handleMainMenuSelection(int choice);
 void listFilesMenu();
 void listAllFiles();
 void listFilesByExtension();
 void listFilesByPattern();
 void createDirectory();
 void changeDirectory();
-void diaplayDirectoryMenu();
-void handleDirectorySelection (int choice);
+void displayDirectoryMenu();
+void handleDirectorySelection(int choice);
 void exitProgram();
 
 int main() {
     int choice;
     do {
-       displayMainMenu();
-       cin >> choice;
-       handleMainMenuSelection(choice);
+        displayMainMenu();
+        cin >> choice;
+        handleMainMenuSelection(choice);
     } while (choice != 4);
     return 0;
 }
 
-void diaplayMainMenu() {
-      cout << "\nDirectory Management System\n";
-      cout << "1. To Display List of Files\n";
-      cout << "2. To Create New Directory\n";
-      cout << "3. To Change the Working Directory\n";
-      cout << "4. Exit\n";
-      cout << "Enter your choice: ";
+void displayMainMenu() {
+    cout << "\nDirectory Management System\n";
+    cout << "1. To Display List of Files\n";
+    cout << "2. To Create New Directory\n";
+    cout << "3. To Change the Working Directory\n";
+    cout << "4. Exit\n";
+    cout << "Enter your choice: ";
 }
 
-void handleMainMenuSelection (int choice) {
+void handleMainMenuSelection(int choice) {
     switch (choice) {
         case 1:
-          listFilesMenu();
+            listFilesMenu();
             break;
         case 2:
-           createDirectory();
+            createDirectory();
             break;
         case 3:
-           changeDirectory();
+            changeDirectory();
             break;
         case 4:
-            exit();
+            exitProgram();
             break;
-            default:
-             cout << "Invalid choice. Please try again.\n";    
+        default:
+            cout << "Invalid choice. Please try again.\n";
     }
 }
 
@@ -66,26 +67,26 @@ void listFilesMenu() {
     cout << "Enter your choice: ";
     cin >> choice;
     
-switch (choice) {
+  switch (choice) {
         case 1:
-           listAllFiles();
+            listAllFiles();
             break;
         case 2:
-           listFilesByExtension();
+            listFilesByExtension();
             break;
         case 3:
-           listFilesByPattern();
+            listFilesByPattern();
             break;
         default:
             cout << "Invalid choice. Returning to main menu.\n";
     }
 }
 
-void listAllFiles () {
-cout << \n"Files in the current directory:\n";
-for (cons audio & entry: fs: : directory_iterator(fs:: current_path())) {
-cout << entry.path (). filename(). string() << endl;
-   }
+void listAllFiles() {
+    cout << "\nFiles in the current directory:\n";
+    for (const auto& entry : fs::directory_iterator(fs::current_path())) {
+        cout << entry.path().filename().string() << endl;
+    }
 }
 
 void listFilesByExtension() {
@@ -95,7 +96,7 @@ void listFilesByExtension() {
     cout << "\nFiles with extension '" << extension << "':\n";
     for (const auto& entry : fs::directory_iterator(fs::current_path())) {
         if (entry.path().extension() == extension) {
-cout << entry.path().filename().string() << endl;
+            cout << entry.path().filename().string() << endl;
         }
     }
 }
@@ -104,14 +105,13 @@ void listFilesByPattern() {
     string pattern;
     cout << "Enter the pattern (e.g., moha*.*): ";
     cin >> pattern;
-     
-string regex_pattern = regex_replace(pattern,regex("\\*"),".*");
+
+  string regex_pattern = regex_replace(pattern, regex("\\*"), ".*");
     
-cout << "\nFiles matching pattern '" << pattern << "':\n";
+  cout << "\nFiles matching pattern '" << pattern << "':\n";
     for (const auto& entry : fs::directory_iterator(fs::current_path())) {
-    if (regex_match(entry.path().filename().string(), 
-    regex(regex_pattern))) {
-        cout << entry.path().filename().string() << endl;
+        if (regex_match(entry.path().filename().string(), regex(regex_pattern))) {
+            cout << entry.path().filename().string() << endl;
         }
     }
 }
@@ -121,7 +121,7 @@ void createDirectory() {
     cout << "Enter the name of the directory to create: ";
     cin >> dirName;
 
-fs::path newDir = fs::current_path() / dirName; // Create in the current directory
+ fs::path newDir = fs::current_path() / dirName; // Create in the current directory
     if (fs::create_directory(newDir)) {
         cout << "Directory '" << dirName << "' created successfully.\n";
     } else {
@@ -133,7 +133,7 @@ void changeDirectory() {
     int choice;
     displayDirectoryMenu();
     cin >> choice;
-handleDirectorySelection(choice);
+    handleDirectorySelection(choice);
 }
 
 void displayDirectoryMenu() {
@@ -146,36 +146,32 @@ void displayDirectoryMenu() {
 
 void handleDirectorySelection(int choice) {
     switch (choice) {
-        case 1:    fs::current_path(fs::current_path().parent_path());
-    cout << "Moved to parent directory: " << fs::current_path() << "\n";
+        case 1:
+            fs::current_path(fs::current_path().parent_path());
+            cout << "Moved to parent directory: " << fs::current_path() << "\n";
             break;
-        case 2:       
-fs : :current_path(fs::path("/"));
-    cout << "Moved to root directory: " << fs::current_path() << "\n";
+        case 2:
+            fs::current_path(fs::path("/"));
+            cout << "Moved to root directory: " << fs::current_path() << "\n";
             break;
         case 3: {
-        string dirName;
-        cout << "Enter the name of the directory to move to: ";
-        cin >> dirName;
+            string dirName;
+            cout << "Enter the name of the directory to move to: ";
+            cin >> dirName;
             if (fs::exists(dirName) && fs::is_directory(dirName)) {
                 fs::current_path(dirName);
-        cout << "Moved to directory: " << fs::current_path() << "\n";
-} else {
-cout << "Error: Directory " << dirName << " does not exist.\n."
-}
-break;
-}
-default: 
-cout << "Invalid choice. Returning to main menu.\n";
-}
+                cout << "Moved to directory: " << fs::current_path() << "\n";
+            } else {
+                cout << "Error: Directory " << dirName << " does not exist.\n";
+            }
+            break;
+        }
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+    }
 }
 
 void exitProgram() {
-cout << " Exiting the program. Goodbye!\n.";
+    cout << "Exiting the program. Goodbye!\n";
+    exit(0);
 }
-
-
-
-    
-       
-
